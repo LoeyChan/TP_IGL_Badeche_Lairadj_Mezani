@@ -1,0 +1,30 @@
+<mat-progress-bar *ngIf="hidden_form"  mode="indeterminate" style="z-index: 3 ;"></mat-progress-bar>
+<div *ngIf="hidden_form" class="hidden_all"></div>
+<div class="user_img w-100">
+  <div class="user_img_circle">
+    <img src="assets/img/login_user.png" alt="">
+  </div>
+</div>
+<div class="login_form flex-column w-100 px-4">
+  <form #form="ngForm" (ngSubmit)="onLogin(form)" >
+
+    <mat-form-field color="" class="w-100">
+      <input matInput placeholder="" required name="email" [(ngModel)]="email" email="true">
+      <mat-label style="font-size: 13px ; "><mat-icon>email</mat-icon>  Email </mat-label>
+    </mat-form-field>
+    <mat-form-field class="w-100 mt-4">
+        <input matInput placeholder="" required type="password" name="password" [(ngModel)]="password">
+        <mat-label style="font-size: 13px ; "><mat-icon>lock</mat-icon> Mot de pass</mat-label>
+    </mat-form-field>
+    <span *ngIf="error_credentials"  class="mt-2 text-danger" style="font-size: 10px ;">* Incorrect email et/ou mot de passe</span>
+    <span class="" class="forget_pass" (click) = "goForget()"> Mot de passe oublié</span>
+    <input class="btn_login btn w-100 mt-3" type="submit" value="Se connecter" [disabled]="!form.valid">
+  </form>
+  <div class="or_div">
+    <hr>
+    <span class="or_hr">Ou</span>
+  </div>
+  <button class="btn btn-danger w-100 gmail_submit"> <i class="fab fa-google"></i> <span class="ml-3">Connecter avec Gmail</span> </button>
+
+
+</div>

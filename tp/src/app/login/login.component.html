@@ -1,0 +1,19 @@
+<div class="row login_all_page flex-md-row-reverse">
+  <div class="col-12 col-md-8 login_description_space ">
+    <img src="assets/img/login_back.png" alt="">
+  </div>
+
+
+  <div class="col-12 col-md-4 login_form_space">
+    <div class="logo_space w-100">
+      <div class="logo_div mx-auto">
+        <img src="assets/img/logo.png" alt="">
+        <span class="align-text-bottom text-muted">École nationale supérieure d'informatique</span>
+      </div>
+    </div>
+    <div [@routeAnimations]="prepereRoute(outlet)" class="content" style="position: relative ;">
+      <router-outlet #outlet="outlet"></router-outlet>
+    </div>
+  </div>
+
+</div>

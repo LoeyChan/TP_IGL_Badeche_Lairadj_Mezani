@@ -1,0 +1,71 @@
+.back_login{
+  font-size: 10px ; text-align : left ; cursor : pointer ; color: gray ;
+}
+.back_login:hover {
+  color: #0278f5 ;
+}
+.logo_space {
+  height : 60px ;
+  margin-top: 20px ;
+  padding: 10px 15px ;
+  overflow: hidden;
+  .logo_div {
+    display: flex ;
+    justify-content: center ;
+    img {
+      height: 40px ;
+    }
+    span {
+      font-weight: bold ;
+      line-height: 40px ;
+      @media screen and (min-width: 909px) {
+          font-size: 1vw;
+      }
+      @media (min-width : 767px) and (max-width: 909px) {
+        font-size: 0.5vw;
+    }
+
+      /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+      @media screen and (max-width: 767px) {
+          font-size: 2vw;
+      }
+    }
+
+  }
+}
+.user_img {
+  height: 150px ;
+  position: relative;
+  overflow: hidden;
+  .user_img_circle {
+    position: absolute;
+    width: 90px ; height: 90px ;
+    left: 50%; top: 50% ;
+    transform: translate(-50% ,-50%) ;
+    border-radius: 50% ;
+    background-color: #1a8efd ;
+    overflow: hidden;
+    img {
+      position: absolute; height: 70% ; width: 70% ; top: 50% ; left :  50% ;
+      transform: translate(-50% , -50%) ;
+    }
+  }
+}
+.hidden_all{
+  position: absolute ;
+  width: 100% ; height : 100% ;
+  top: 0 ; left:0 ;
+  background-color: rgba(255, 255, 255, 0.7) ;
+  z-index: 2 ;
+}
+.login_form {
+  form {
+    .btn_submit {
+      background-color: #1a8efd ;
+      border-color: #1a8efd ; color : white ;
+    }
+    .btn_submit:hover , .btn_submit:focus{
+      background-color: #056bff ;
+    }
+  }
+}
