@@ -1,0 +1,129 @@
+<mat-progress-bar *ngIf="hidden_form"  mode="indeterminate" style="z-index: 3 ;"></mat-progress-bar>
+<div *ngIf="user_not_found && !hidden_form" class="etudiant_not_found w-100 text-center text-" >
+  Etudiant Introuvable
+</div>
+<div *ngIf="user_found && !hidden_form"  class="w-100 row" style="margin-left: 0 ;">
+
+  <div  class="one_etudiant_div col-12">
+    <mat-card>
+      <mat-card-content>
+        <div *ngIf="etudiant.currentYear == 1 "  class="divEtudiantYear" style="background-color: #c3b619 ;">1 CPI</div>
+        <div *ngIf="etudiant.currentYear == 2 "  class="divEtudiantYear" style="background-color: #71b554 ;">2 CPI</div>
+        <div *ngIf="etudiant.currentYear == 3 "  class="divEtudiantYear" style="background-color: lightskyblue ; ">1 CS</div>
+        <div *ngIf="etudiant.currentYear == 4 "  class="divEtudiantYear" style="background-color: #c31313 ;">2 CS</div>
+        <div *ngIf="etudiant.currentYear == 5 "  class="divEtudiantYear" style="background-color: mediumorchid ;">3 CS</div>
+        <div class="divEtudiantImg">
+          <img *ngIf="!etudiant.pic"  src="./assets/img/student.png" alt="">
+          <img *ngIf="etudiant.pic"  [src]="etudiant.pic | safeUrl" alt="">
+        </div>
+        <div class="etudiant_name w-100">{{etudiant.name+" "+etudiant.lastname}}</div>
+        <div class="divEtudiantInfo w-100 row">
+          <div class="personel_info col-12 col-md-5 col-lg-4 row ml-0">
+            <div class="label_name label_info col-6">Email :</div>
+            <div class="input_name input_info col-6">{{etudiant.email}}</div>
+
+            <div class="label_name label_info col-6">Télephone :</div>
+            <div class="input_name input_info col-6">{{etudiant.phone}}</div>
+            <div class="label_name label_info col-6">Adresse :</div>
+            <div class="input_name input_info col-6">{{etudiant.adresse}}</div>
+
+          </div>
+          <div class="col-12 col-md-2 col-lg-4"></div>
+          <div class="personel_info col-12 col-md-5 col-lg-4 row ml-0">
+            <div class="label_name label_info col-6">Date de Naissance :</div>
+            <div class="input_name input_info col-6">{{etudiant.naissance}}</div>
+
+            <div class="label_name label_info col-6">Lieu de Naissance :</div>
+            <div class="input_name input_info col-6">{{etudiant.lieu}}</div>
+
+            <div class="label_name label_info col-6">Genre :</div>
+            <div *ngIf="etudiant.sex == 'm'" class="input_name input_info col-6">Homme</div>
+            <div *ngIf="etudiant.sex == 'f'"  class="input_name input_info col-6">Femme</div>
+          </div>
+
+        </div>
+        <div class="document_all_div w-100">
+          <hr>
+          <div class="bacTitle">
+            Bac ({{etudiant.bacYear}})
+          </div>
+          <div class="divBacInfo w-100 row">
+            <div class="personel_info col-12 col-md-5 col-lg-4 row ml-0">
+              <div class="label_name label_info col-6">Région :</div>
+              <div class="input_name input_info col-6">{{etudiant.bac.region}}</div>
+
+              <div class="label_name label_info col-6">Filière :</div>
+              <div class="input_name input_info col-6">{{etudiant.bac.filiere}}</div>
+
+              <div class="label_name label_info col-6">Moyenne :</div>
+              <div class="input_name input_info col-6">{{etudiant.bac.moyenne}}</div>
+
+            </div>
+            <div class="col-12 col-md-1 col-lg-2"></div>
+            <div class="personel_info col-12 col-md-6 col-lg-6 row ml-0">
+                <div class="col-6 document-item">
+                  <div class="add_document_item" >
+                    <i *ngIf="!etudiant.bac.attestation"  class="fas fa-image"></i>
+                    <img *ngIf="etudiant.bac.attestation"  [src]="etudiant.bac.attestation" alt="">
+                  </div>
+                  <div class="title_document_item">Attestation</div>
+                </div>
+
+                <div class="col-6 document-item">
+                  <div class="add_document_item" >
+                    <i *ngIf="!etudiant.bac.relevai"  class="fas fa-image"></i>
+                    <img *ngIf="etudiant.bac.relevai"  [src]="etudiant.bac.relevai" alt="">
+                  </div>
+                  <div class="title_document_item">Relevé</div>
+                </div>
+
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="document_all_div w-100" *ngFor="let document of etudiant.documents" >
+            <hr>
+            <div class="bacTitle">
+              {{document.title}}
+            </div>
+            <div class="divBacInfo w-100 row">
+              <div class="personel_info col-12 col-md-5 col-lg-4 row ml-0">
+                <div class="label_name label_info col-6">Université :</div>
+                <div class="input_name input_info col-6">{{document.univ}}</div>
+
+                <div class="label_name label_info col-6">Moyenne :</div>
+                <div class="input_name input_info col-6">{{document.moyenne}}</div>
+
+                <div class="label_name label_info col-6">Résultat :</div>
+                <div class="input_name input_info col-6">{{document.resultat}}</div>
+
+
+              </div>
+              <div class="col-12 col-md-1 col-lg-2"></div>
+              <div class="personel_info col-12 col-md-6 col-lg-6 row ml-0">
+                  <div class="col-6 document-item">
+                    <div class="add_document_item" >
+                      <i *ngIf="!document.attestation"  class="fas fa-image"></i>
+                      <img *ngIf="document.attestation"  [src]="document.attestation" alt="">
+                    </div>
+                    <div class="title_document_item">Attestation</div>
+                  </div>
+
+                  <div class="col-6 document-item">
+                    <div class="add_document_item" >
+                      <i *ngIf="!document.relevai"  class="fas fa-image"></i>
+                      <img *ngIf="document.relevai"  [src]="document.relevai" alt="">
+                    </div>
+                    <div class="title_document_item">Relevé</div>
+                  </div>
+
+              </div>
+            </div>
+
+          </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

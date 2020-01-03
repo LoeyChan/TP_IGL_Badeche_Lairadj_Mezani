@@ -1,0 +1,54 @@
+<div class="all_etudiants">
+  <ng-scrollbar>
+    <div class="w-100 row" style="margin-left: 0 ;">
+
+      <div *ngFor="let etudiant of etudiants | filterBy: myfilter"  class="one_etudiant_div col-12 col-sm-6 col-md-4" (click)="clickEtudiant(etudiant.id)" >
+        <mat-card>
+          <mat-card-content>
+            <div *ngIf="etudiant.currentYear == 1 "  class="divEtudiantYear" style="background-color: #c3b619 ;">1 CPI</div>
+            <div *ngIf="etudiant.currentYear == 2 "  class="divEtudiantYear" style="background-color: #71b554 ;">2 CPI</div>
+            <div *ngIf="etudiant.currentYear == 3 "  class="divEtudiantYear" style="background-color: lightskyblue ; ">1 CS</div>
+            <div *ngIf="etudiant.currentYear == 4 "  class="divEtudiantYear" style="background-color: #c31313 ;">2 CS</div>
+            <div *ngIf="etudiant.currentYear == 5 "  class="divEtudiantYear" style="background-color: mediumorchid ;">3 CS</div>
+            <div class="divEtudiantImg">
+              <img *ngIf="!etudiant.img"  src="./assets/img/student.png" alt="">
+              <img *ngIf="etudiant.img"  [src]="etudiant.img | safeUrl" alt="">
+            </div>
+            <div class="divEtudiantInfo row">
+              <div class="label_name label_info col-6">Nom :</div>
+              <div class="input_name input_info col-6">{{etudiant.name}}</div>
+
+              <div class="label_name label_info col-6">Prénom :</div>
+              <div class="input_name input_info col-6">{{etudiant.lastname}}</div>
+
+              <div class="label_name label_info col-6">Genre :</div>
+              <div *ngIf="etudiant.sex == 'm'" class="input_name input_info col-6">Homme</div>
+              <div *ngIf="etudiant.sex == 'f'"  class="input_name input_info col-6">Femme</div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </ng-scrollbar>
+
+
+
+  </div>
+  <div class="bar_search row">
+    <mat-form-field color="" class="col-8">
+      <input matInput type="text" (change)="onChangeSearch()" [(ngModel)]="myfilter.name_c" placeholder="Chercher un Etudiant">
+    </mat-form-field>
+      <mat-form-field color="" class="col-4">
+        <mat-select placeholder="Année" value="" [(ngModel)]="myfilter.currentYear" >
+            <mat-option value="">Tous</mat-option>
+            <mat-option value="1">1 CPI</mat-option>
+            <mat-option value="2">2 CPI</mat-option>
+            <mat-option value="3">1 CS</mat-option>
+            <mat-option value="4">2 CS</mat-option>
+            <mat-option value="5">3 CS</mat-option>
+        </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="add_etudiant" (click)= "onAddEtudiant()">
+    <i class="fas fa-user-plus"></i>
+  </div>

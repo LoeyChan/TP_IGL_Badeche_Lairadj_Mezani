@@ -1,0 +1,15 @@
+<mat-progress-bar *ngIf="hidden_form"  mode="indeterminate" style="z-index: 3 ;"></mat-progress-bar>
+<div *ngIf="hidden_form" class="message_dialog text-muted w-100 p-2">
+  Traitement en cours...
+</div>
+<div *ngIf="succee_msg" class="message flex-column justify-content-center w-100 p-2 text-success">
+  <i class="fas fa-check-circle"></i><br>
+  <span>Terminer avec succès</span>
+</div>
+
+<div *ngIf="error_msg" class="message flex-column justify-content-center w-100 p-2 text-danger">
+  <i class="fas fa-times-circle    "></i><br>
+  <span>Terminer avec erreurs</span>
+</div>
+
+<button *ngIf="error_msg" (click)="onNoClick()"   class="btn btn-danger w-100">Quiter</button>

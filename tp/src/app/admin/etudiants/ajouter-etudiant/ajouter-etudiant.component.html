@@ -1,0 +1,214 @@
+<form (ngSubmit)="onSubmit(form)" (change)="validateFiles()"  #form="ngForm"  class="row p-3">
+  <div class="col-12 col-md-6 personelle_info">
+    <mat-card>
+      <mat-card-title>Informations Pérsonnelles</mat-card-title>
+      <mat-card-content class="row" ngModelGroup="personel_info">
+          <div class="this_studant_img col-12">
+            <input type="file" #imageUploder (change)="etudiant.info.onImageChange($event)" style="display: none ;">
+            <img *ngIf="!etudiant.info.img" src="assets/img/student.png" alt="" class="">
+            <img *ngIf="etudiant.info.img" [src]="etudiant.info.img_url" alt="" class="">
+            <div class="this_studant_img_add" (click) = "imageUploder.click()">
+              <i class="fas fa-camera"></i>
+            </div>
+          </div>
+        <mat-form-field color="" class=" col-6">
+          <input matInput placeholder="Nom" type="text" required [(ngModel)] = "etudiant.info.name" name="name">
+        </mat-form-field>
+
+        <mat-form-field color="" class="col-6">
+          <input matInput placeholder="Prénom" type="text" required [(ngModel)] = "etudiant.info.lastname" name="lastname" >
+        </mat-form-field>
+
+        <mat-form-field color="" class="col-12">
+          <mat-select placeholder="Genre" required  [(ngModel)] = "etudiant.info.sex" name="sex">
+              <mat-option value="m">Homme</mat-option>
+              <mat-option value="f">Femme</mat-option>
+          </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="col-6">
+        <input matInput [matDatepicker]="picker" placeholder="Date de naissance" required [(ngModel)]="etudiant.info.date" name="date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field color="" class="col-6">
+        <input matInput placeholder="Lieu de naissance" type="text" required [(ngModel)] = "etudiant.info.lieu" name="lieu" >
+      </mat-form-field>
+
+        <mat-form-field color="" class="col-12">
+          <input matInput type="number" (change)="onBacYearChange()" placeholder="Année du Bac" required [(ngModel)] = "etudiant.info.bacYear" name="bacYear">
+        </mat-form-field>
+
+        <mat-form-field color="" class="col-12">
+            <mat-select placeholder="Année courante" required  [(ngModel)] = "etudiant.info.currentYear" name="currentYear">
+                <mat-option  value="1">1 CPI</mat-option>
+                <mat-option *ngIf="max_year > 1" value="2">2 CPI</mat-option>
+                <mat-option *ngIf="max_year > 2" value="3">1 CS</mat-option>
+                <mat-option *ngIf="max_year > 3" value="4">2 CS</mat-option>
+                <mat-option *ngIf="max_year > 4" value="5">3 CS</mat-option>
+            </mat-select>
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+
+
+    <div class="other_infos row mt-4 mb-4">
+      <div class="contact_info col-12 col-sm-6">
+          <mat-card>
+            <mat-card-title>Contact</mat-card-title>
+            <mat-card-content ngModelGroup="contact">
+
+              <mat-form-field color="" class="w-100">
+                <input matInput required [(ngModel)]="etudiant.contact.tlf" name="tlf" placeholder="Numéro Téléphone" type="text">
+              </mat-form-field>
+
+              <mat-form-field color="" class="w-100">
+                <textarea matInput name="" id="" required [(ngModel)]="etudiant.contact.adresse" name="adresse" placeholder="Adresse" rows="4" style="max-height: 100px ; min-height : 100px ;"></textarea>
+              </mat-form-field>
+            </mat-card-content>
+          </mat-card>
+      </div>
+
+      <div class="compte_infos col-12 col-sm-6">
+          <mat-card>
+            <mat-card-title>Compte</mat-card-title>
+            <img mat-card-image src="" alt="">
+            <mat-card-content ngModelGroup="compte">
+              <mat-form-field color="" class="w-100">
+                <input matInput placeholder="mail" required [(ngModel)]="etudiant.compte.mail" name="mail" email="true" type="email">
+              </mat-form-field>
+
+              <mat-form-field color="" class="w-100">
+                <input matInput placeholder="Mot de Passe" required [(ngModel)]="etudiant.compte.password" name="password" type="password">
+              </mat-form-field>
+
+              <mat-form-field color="" class="w-100">
+                  <input matInput placeholder="Confirmamtion" [pattern]="etudiant.compte.password" required [(ngModel)]="etudiant.compte.confirmation" name="confirmation" type="password">
+              </mat-form-field>
+            </mat-card-content>
+          </mat-card>
+      </div>
+
+    </div>
+
+
+  </div>
+
+  <div class="col-12 col-md-6 documents">
+    <mat-card >
+      <mat-card-title>Bac</mat-card-title>
+      <mat-card-content class="row" ngModelGroup="bac">
+        <mat-form-field color="" class="col-12">
+          <input matInput placeholder="Filière" required [(ngModel)]="etudiant.bac.filiere" name="filiere" type="text">
+        </mat-form-field>
+        <mat-form-field color="" class="col-12">
+          <input matInput placeholder="Moyenne" required [(ngModel)]="etudiant.bac.moyenne" name="moyenne" type="text">
+        </mat-form-field>
+        <mat-form-field color="" class="col-12">
+          <input matInput placeholder="Région" required [(ngModel)]="etudiant.bac.region" name="region" type="text">
+        </mat-form-field>
+
+        <div class="col-6 document-item">
+          <input type="file" #BacAttUploder (change)="etudiant.bac.onAttestationChange($event)" style="display: none ;">
+
+          <div class="add_document_item" (click)="BacAttUploder.click()" [ngClass]="{'add_document_item_checked' : etudiant.bac.attestation , 'add_document_item_no_checked' : !etudiant.bac.attestation }" >
+              <i *ngIf="etudiant.bac.attestation"  class="fas fa-file-alt"></i>
+              <i *ngIf="!etudiant.bac.attestation"  class="fas fa-file-upload"></i>
+          </div>
+          <div class="title_document_item">Attestation</div>
+        </div>
+
+        <div class="col-6 document-item">
+          <input type="file" #BacRelUploder (change)="etudiant.bac.onRelevaiChange($event)" style="display: none ;">
+
+          <div class="add_document_item" (click)="BacRelUploder.click()" [ngClass]="{'add_document_item_checked' : etudiant.bac.relevai , 'add_document_item_no_checked' : !etudiant.bac.relevai }" >
+              <i *ngIf="etudiant.bac.relevai"  class="fas fa-file-alt"></i>
+              <i *ngIf="!etudiant.bac.relevai"  class="fas fa-file-upload"></i>
+          </div>
+          <div class="title_document_item">Relevé</div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="mt-3">
+        <mat-card-title>Année Courante</mat-card-title>
+        <mat-card-content class="row">
+          <div class="col-3"></div>
+          <div class="col-6 document-item">
+            <input type="file" #ThisYearCertificat (change)="etudiant.currentYear.onCertificatChange($event)" style="display: none ;">
+
+            <div class="add_document_item" (click)="ThisYearCertificat.click()" [ngClass]="{'add_document_item_checked' : etudiant.currentYear.certificat , 'add_document_item_no_checked' : !etudiant.currentYear.certificat }" >
+                <i *ngIf="etudiant.currentYear.certificat"  class="fas fa-file-alt"></i>
+                <i *ngIf="!etudiant.currentYear.certificat"  class="fas fa-file-upload"></i>
+            </div>
+            <div class="title_document_item">Certificat de Scolarité</div>
+          </div>
+
+          <div class="col-3"></div>
+        </mat-card-content>
+      </mat-card>
+
+
+    </div>
+    <div class="col-12 mt-2" *ngIf="steps.length > 0" >
+      <mat-card class="col-12 mt-3">
+        <mat-card-title>Années Dernières </mat-card-title>
+        <mat-card-content class="row">
+          <mat-horizontal-stepper labelPosition="bottom" #stepper>
+              <mat-step *ngFor="let step of steps ; let i = index ;">
+                <ng-template matStepLabel>{{step.title}}</ng-template>
+
+                <mat-form-field color="" class="col-12">
+                    <input matInput placeholder="Université" type="text" name="univ" [(ngModel)]="step.univ" required>
+                  </mat-form-field>
+                  <mat-form-field color="" class="col-12">
+                      <mat-select placeholder="Année"  name="year" [(ngModel)]="step.year" required>
+                          <mat-option value="1">1 CPI</mat-option>
+                          <mat-option value="2">2 CPI</mat-option>
+                          <mat-option value="3">1 CS</mat-option>
+                          <mat-option value="4">2 CS</mat-option>
+                          <mat-option value="5">3 CS</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                  <mat-form-field color="" class="col-12">
+                    <input matInput placeholder="Moyenne" type="text"  name="avg" [(ngModel)]="step.avg" required>
+                  </mat-form-field>
+                  <mat-form-field color="" class="col-12">
+                    <input matInput placeholder="Résultat" type="text"  name="result" [(ngModel)]="step.result" required>
+                  </mat-form-field>
+                <div class="col-6 document-item">
+                  <input type="file" #LastYearCertificat (change)="onUploadYearCertificat($event , i)" style="display: none ;">
+
+                  <div class="add_document_item" (click)="LastYearCertificat.click()" [ngClass]="{'add_document_item_checked' : step.certificat , 'add_document_item_no_checked' : !step.certificat }" >
+                      <i *ngIf="step.certificat"  class="fas fa-file-alt"></i>
+                      <i *ngIf="!step.certificat"  class="fas fa-file-upload"></i>
+                  </div>
+                  <div class="title_document_item">Certificat de Scolarité</div>
+                </div>
+
+                <div class="col-6 document-item">
+                  <input type="file" #LastYearRelevai (change)="onUploadYearRelevai($event , i)" style="display: none ;">
+
+                  <div class="add_document_item" (click)="LastYearRelevai.click()" [ngClass]="{'add_document_item_checked' : step.relevai , 'add_document_item_no_checked' : !step.relevai }" >
+                      <i *ngIf="step.relevai"  class="fas fa-file-alt"></i>
+                      <i *ngIf="!step.relevai"  class="fas fa-file-upload"></i>
+                  </div>
+                  <div class="title_document_item">Relevé</div>
+                </div>
+                <div>
+                    <button mat-button matStepperNext  >Suivant</button>
+                    <button mat-button matStepperPrevious *ngIf="i > 0" >Précédent</button>
+                </div>
+              </mat-step>
+          </mat-horizontal-stepper>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-12 col-md-4 py-4">
+      <div class="btn btn-danger w-100" style="cursor : pointer ;" (click)="onAnnuler()">Annuler</div>
+    </div>
+    <div class="col-12 col-md-8 py-4">
+      <input type="submit" value="Valider" [disabled]="!(form.valid && validDocuments)"  class="w-100 btn btn-dark">
+    </div>
+</form>

@@ -1,0 +1,82 @@
+<mat-toolbar id='maintoolbar' class="fixed-top">
+  <div class="side-toolbar"  [ngClass]="sidenav_class">
+    <div class="toolbar-logo" >
+      <img src="./assets/img/logo.png" alt=""> <span>Ecole Nationnale <br> Supérieure d'Informatique</span>
+    </div>
+    <mat-icon (click)="onOpenSidenav()">subject</mat-icon>
+  </div>
+  <div class="icons-toolbar">
+    <mat-icon
+      class="toolbar-icons"
+      matBadge="8"
+      matBadgePosition="after"
+      matBadgeColor="accent"
+    >
+      notifications
+    </mat-icon>
+    <mat-icon
+      class="toolbar-icons"
+      matBadge="8"
+      matBadgePosition="after"
+      matBadgeColor="accent"
+    >
+      mail
+    </mat-icon>
+    <mat-icon class="toolbar-icons" >
+      settings
+    </mat-icon>
+
+  </div>
+</mat-toolbar>
+
+<mat-sidenav-container fullscreen>
+  <mat-sidenav
+    mode='side'
+    #sidenav
+    id="sidenav"
+    [ngClass]='sidenav_class'
+    opened
+  >
+    <ng-scrollbar visibility="hover"	>
+      <div class="user_info">
+        <div class="user_img">
+          <img src="./assets/img/user.png" alt="">
+        </div>
+        <div class="user_name">Nom d'Utilisateur</div>
+        <div class="user_role">le role de l'utilisateur</div>
+      </div>
+      <hr>
+
+      <div class="w-100 one_operation" (click)="onStatsClick('dash')" [ngClass]="{activate_state : activateState == 'dash' }" >
+        <i class="fas fa-home"></i><span>Dashboard</span>
+      </div>
+      <div class="w-100 one_operation" (click)="onStatsClick('etudiants')"   [ngClass]="{activate_state : activateState == 'etudiants' }">
+        <i class="fas fa-user"></i> <span>Etudiants</span>
+      </div>
+      <div class="w-100 one_operation">
+        <i class="fas fa-school"></i> <span>Enseignants</span>
+      </div>
+      <div class="w-100 one_operation">
+        <i class="fas fa-calendar"></i> <span>Emploi du temps</span>
+      </div>
+      <div class="w-100 one_operation">
+        <i class="fas fa-cubes"></i> <span>Ressources</span>
+      </div>
+      <div class="w-100 one_operation">
+        <i class="fas fa-clock"></i> <span>Evenements</span>
+      </div>
+      <div class="btn btn-dark logout_btn" (click)="onLogout()">
+        <i class="fas fa-sign-out-alt"></i> <span>Se déconnecter</span>
+      </div>
+    </ng-scrollbar>
+  </mat-sidenav>
+
+  <mat-sidenav-content
+    #sidenavContent
+    id="sidenavContent"
+    [ngClass]='sidenav_class'
+    >
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
