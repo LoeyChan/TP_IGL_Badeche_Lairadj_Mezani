@@ -1,0 +1,190 @@
+{
+    "variables": [],
+    "info": {
+        "name": "Authservice API",
+        "_postman_id": "c80554b0-d0bf-4697-927a-14d49a8e83cc",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Login Process",
+            "description": "",
+            "item": [
+                {
+                    "name": "http:\/\/localhost\/api\/login",
+                    "request": {
+                        "url": "http:\/\/localhost\/api\/login",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"admin@esi.dz\",\n    \"password\": \"abcdefgh\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Reset Password Process",
+            "description": "",
+            "item": [
+                {
+                    "name": "Create token password reset",
+                    "request": {
+                        "url": "http:\/\/localhost\/api\/password\/create",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"admin@esi.dz\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Find token password reset",
+                    "request": {
+                        "url": "http:\/\/localhost\/api\/password\/find\/{token}?token=mdhhqgjslseoukjlsdlkj",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Reset password",
+                    "request": {
+                        "url": "http:\/\/localhost\/api\/password\/reset",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"password\": \"123456\",\n    \"password_confirmation\": \"123456\",\n    \"token\": \"mdhhqgjslseoukjlsdlkj\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Students Manager",
+            "description": "",
+            "item": [
+                {
+                    "name": "http:\/\/localhost\/api\/etudiant\/ajouter",
+                    "request": {
+                        "url": "http:\/\/localhost\/api\/etudiant\/ajouter",
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"nameStudent\",\n    \"lastname\": \"lastnameStudent\",\n    \"sex\": \"m\",\n    \"img\": \"image\",\n    \"date\": \"04\\\/03\\\/2001\",\n    \"lieu\": \"constantine\",\n    \"bacYear\": \"2019\",\n    \"currentYear\": \"1\",\n    \"phone\": \"0664360682\",\n    \"adresse\": \"constantine\",\n    \"email\": \"student@esi.dz\",\n    \"password\": \"123456\",\n    \"password_confirmation\": \"123456\",\n    \"bacFiliere\": \"Math\",\n    \"bacMoyenne\": \"17.17\",\n    \"bacRegion\": \"constantine\",\n    \"bacAttestation\": \"file\",\n    \"bacRelevai\": \"file\",\n    \"number_oldYears\": \"0\"\n}"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "http:\/\/localhost\/api\/etudiant",
+                    "request": {
+                        "url": "http:\/\/localhost\/api\/etudiant",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "http:\/\/localhost\/api\/etudiant\/{etudiant_id}",
+                    "request": {
+                        "url": "http:\/\/localhost\/api\/etudiant\/{etudiant_id}?id=1",
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[]"
+                        },
+                        "description": "",
+                        "response": []
+                    }
+                }
+            ]
+        }
+    ]
+}
