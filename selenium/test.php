@@ -36,7 +36,7 @@ sleep(1) ;
 $pass_input = $driver->findElement(Facebook\WebDriver\WebDriverBy::name('password'));
 $pass_input->click() ;
 sleep(1) ;
-$pass_input->sendKeys("abdoutop") ;
+$pass_input->sendKeys("abdoutop2") ;
 sleep(2) ;
 $driver->findElement(Facebook\WebDriver\WebDriverBy::cssSelector('.btn_login'))->click();
 sleep(2) ;
