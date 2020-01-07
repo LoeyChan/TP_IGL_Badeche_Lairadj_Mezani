@@ -1,9 +1,18 @@
-FROM node:latest as node
+FROM node:alpine AS builder
+
 WORKDIR /app
 
 COPY . .
 RUN npm install
-RUN npm run build --prod
+EXPOSE 4200
+
+RUN npm run build
 
 FROM nginx:alpine
-COPY --from=node /app/dist/tp /usr/share/ngnix/html
+
+COPY --from=builder /app/dist/* /usr/share/nginx/html/
+
+RUN rm /etc/nginx/conf.d/default.conf
+
+COPY --from=builder /app/nginx.conf etc/nginx/conf.d/default.conf
+

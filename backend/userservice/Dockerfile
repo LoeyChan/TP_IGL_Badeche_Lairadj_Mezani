@@ -16,3 +16,16 @@ RUN apt-get update \
  && echo "AllowEncodedSlashes On" >> /etc/apache2/apache2.conf
 
 WORKDIR /var/www
+
+COPY . .
+
+RUN composer install
+
+RUN chown -R $USER:www-data storage
+
+RUN chmod -R 775 storage
+
+RUN rm public/storage
+
+
+RUN ln -s /var/www/storage/app/public /var/www/public/storage
