@@ -23,8 +23,12 @@ exemple :
 
 - Open your broser and navigat to [http://localhost:8000/docs/](http://localhost:8000/docs/) .
 
-## RUN the unit test
+## RUN the unit tests
 
+- There are two unit tests : 
+    - One for geting all the list of students  
+    - The other for adding a new student
+    
 - open the authservice bash By :
 ```console
 ~/IGL_TP $ docker-compose exec authservice /bin/bash
@@ -40,7 +44,7 @@ root@b348577f8faa:/var/www# vendor/bin/phpunit
 
 - cd to selenium folder , and run the selenuim server :
 ```console
-~/IGL_TP/selenium $ java -jar selenium-server-standalone-3.141.59.jar -enablePassThrough false
+~/IGL_TP/selenium $ java -jar selenium-server-standalone-3.141.59.jar
 ```
 
 - Run the selenium test By runing the the test.php script : 
